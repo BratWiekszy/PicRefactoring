@@ -14,6 +14,8 @@ namespace PicRefactoring.Predicates
 			details.Prepare();
 		}
 
+		public int Order => 100000;
+
 		public bool FileMatches([NotNull] IFileWrapper file)
 		{
 			return _details.FileMatches(file);

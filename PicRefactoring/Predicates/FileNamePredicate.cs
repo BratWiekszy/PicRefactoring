@@ -19,6 +19,8 @@ namespace PicRefactoring.Predicates
 			Prepare();
 		}
 
+		public int Order => 1000;
+
 		private void CheckValidity()
 		{
 			if(_regExpressions.Any(r => string.IsNullOrEmpty(r)))
@@ -35,6 +37,5 @@ namespace PicRefactoring.Predicates
 			var fileName = file.GetFileName();
 			return _regexes.Any(r => r.IsMatch(fileName));
 		}
-
 	}
 }

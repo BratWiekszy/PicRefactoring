@@ -6,5 +6,7 @@ namespace PicRefactoring.Predicates
 	public interface IFilePredicate
 	{
 		bool FileMatches([NotNull] IFileWrapper file);
+
+		int Order { get; }
 	}
 }

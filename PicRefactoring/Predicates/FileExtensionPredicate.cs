@@ -18,6 +18,8 @@ namespace PicRefactoring.Predicates
 			CleanExtensions();
 		}
 
+		public int Order => 10;
+
 		private void CheckValidity()
 		{
 			if(_extensions.Any(e => string.IsNullOrEmpty(e)))
