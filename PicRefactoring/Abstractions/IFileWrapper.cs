@@ -9,5 +9,7 @@
 		int GetHeight();
 
 		string GetExtension();
+
+		string GetFileName();
 	}
 }
