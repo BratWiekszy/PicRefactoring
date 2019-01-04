@@ -7,8 +7,10 @@ namespace PicRefactoring.Commanding
 	public enum ActionType
 	{
 		Rescale,
-		Rename,
-		SuggestDuplicates
+		RenameCut,
+		RenameRandom,
+		RenameRegex,
+		DetectDuplicates
 	}
 
 	[JsonInfo(new Type[]{typeof(string), typeof(object)}, true, 
@@ -49,12 +51,14 @@ namespace PicRefactoring.Commanding
 		{
 			switch (_type)
 			{
-				case ActionType.Rename:
+				case ActionType.RenameCut:
+				case ActionType.RenameRandom:
+				case ActionType.RenameRegex:
 				case ActionType.Rescale: {
 					if(Value == null) throw new BadCommandException();
 				}
 					break;
-				case ActionType.SuggestDuplicates: {
+				case ActionType.DetectDuplicates: {
 					if(Value != null) throw new BadCommandException();
 				}
 					break;

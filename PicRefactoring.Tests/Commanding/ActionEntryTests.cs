@@ -33,9 +33,11 @@ namespace PicRefactoring.Tests.Commanding
 		[Test]
 		public void ActionTypesDeclarationAintTooStrict()
 		{
-			Assert.DoesNotThrow(() => new ActionEntry("Rescale",      new JsonToken()));
-			Assert.DoesNotThrow(() => new ActionEntry("rename",       new JsonToken()));
-			Assert.DoesNotThrow(() => new ActionEntry("SUGGESTDUPLICATES", null));
+			Assert.DoesNotThrow(() => new ActionEntry("Rescale", new JsonToken()));
+			Assert.DoesNotThrow(() => new ActionEntry("renameCut", new JsonToken()));
+			Assert.DoesNotThrow(() => new ActionEntry("renamerandom", new JsonToken()));
+			Assert.DoesNotThrow(() => new ActionEntry("RenameRegex", new JsonToken()));
+			Assert.DoesNotThrow(() => new ActionEntry("DETECTDUPLICATES", null));
 		}
 	}
 }
