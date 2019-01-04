@@ -24,5 +24,21 @@ namespace PicRefactoring.Tests
 
 			Assert.AreEqual("png", fileWrapper.GetExtension());
 		}
+
+		[Test]
+		public void GetFileName_ReturnsCorrect()
+		{
+			var fileWrapper = new FileWrapper(new FileInfo("nest_by_mrfloki-dcgzwvz.png"));
+
+			Assert.AreEqual("nest_by_mrfloki-dcgzwvz", fileWrapper.GetFileName());
+		}
+
+		[Test]
+		public void GetFileName_NotContainsPath()
+		{
+			var fileWrapper = new FileWrapper(new FileInfo(@".\someDir\nest_by_mrfloki-dcgzwvz.png"));
+
+			Assert.AreEqual("nest_by_mrfloki-dcgzwvz", fileWrapper.GetFileName());
+		}
 	}
 }

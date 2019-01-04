@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using JetBrains.Annotations;
 using PicRefactoring.Abstractions;
 using PicRefactoring.Commanding;
 
@@ -9,7 +10,7 @@ namespace PicRefactoring.Predicates
 	{
 		private string[] _extensions;
 
-		public FileExtensionPredicate(string[] extensions) 
+		public FileExtensionPredicate([NotNull] string[] extensions) 
 		{
 			_extensions = extensions;
 
