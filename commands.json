@@ -10,9 +10,9 @@
 				{
 					"Type": "regex",
 					"Value": [
-						"^__([\\w_\\d]+)[_-]{1,2}sample[-_]{1,2}[\\dabcdef]+$",
+						"^__([\w_\d]+)[_-]{1,2}sample[-_]{1,2}[\dabcdef]+$",
 						// long filename
-						"^[\\w\\d-_]{60,}$"
+						"^[\w\d-_]{60,}$"
 					]
 				},
 				{
@@ -41,15 +41,26 @@
 					} 
 				},
 				{
-					"Type": "rename",
+					"Type": "renameCut",
 					"Value": {
-						"Type": "random",
 						"MinLength": "20" 
 					} 
 				},
 				{
-					"Type": "writeDuplicates",
-					"Value": null
+					"Type": "renameRandom",
+					"Value": {
+						"MinLength": "20" 
+					} 
+				},
+				{
+					"Type": "renameRegex",
+					"Value": {
+						"MinLength": "20",
+						"OutputRegex": "(?<=__)[\w\d-_]+?(?=[-_]{1,2}+sample[-_][\d\w]+)" 
+					} 
+				},
+				{
+					"Type": "detectDuplicates"
 				}
 			] 
 
