@@ -1,0 +1,58 @@
+{
+	// list of directories to process
+	"Directories": [],
+	// list of steps to perform on each file
+	"Executions": [
+		{
+			"Title": "Rescaling",
+			// check if file ir proper
+			"Predicates": [
+				{
+					"Type": "regex",
+					"Value": [
+						"^__([\\w_\\d]+)[_-]{1,2}sample[-_]{1,2}[\\dabcdef]+$",
+						// long filename
+						"^[\\w\\d-_]{60,}$"
+					]
+				},
+				{
+					"Type": "extension",
+					"Value": [
+						"jpg",
+						"jpeg",
+						"png"
+					]
+				},
+				{
+					"Type": "properties",
+					"Details": {
+						"Comparison": "or", 
+						"MinKbWeight": "1024",
+						"MinSize": "2000" 
+					} 
+				}
+			],
+			// actions to perform
+			"Actions": [
+				{
+					"Type": "rescale",
+					"Value": {
+						"MaxSize": "1900" 
+					} 
+				},
+				{
+					"Type": "rename",
+					"Value": {
+						"Type": "random",
+						"MinLength": "20" 
+					} 
+				},
+				{
+					"Type": "writeDuplicates",
+					"Value": null
+				}
+			] 
+
+		}
+	] 
+}
