@@ -5,6 +5,17 @@ VisualStudioVersion = 15.0.28307.168
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PicRefactoring", "PicRefactoring\PicRefactoring.csproj", "{7141CEDA-535F-4C06-87FE-CCA0DD228134}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PicRefactoring.Tests", "PicRefactoring.Tests\PicRefactoring.Tests.csproj", "{171E5695-9C60-4E65-98A9-9114AD6DB60D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{22832301-9741-4CB5-8805-5DC58BD072E3}"
+	ProjectSection(SolutionItems) = preProject
+		commands.json = commands.json
+		Desc.txt = Desc.txt
+	EndProjectSection
+	ProjectSection(FolderGlobals) = preProject
+		__JSONSchema = 
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +26,10 @@ Global
 		{7141CEDA-535F-4C06-87FE-CCA0DD228134}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7141CEDA-535F-4C06-87FE-CCA0DD228134}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7141CEDA-535F-4C06-87FE-CCA0DD228134}.Release|Any CPU.Build.0 = Release|Any CPU
+		{171E5695-9C60-4E65-98A9-9114AD6DB60D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{171E5695-9C60-4E65-98A9-9114AD6DB60D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{171E5695-9C60-4E65-98A9-9114AD6DB60D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{171E5695-9C60-4E65-98A9-9114AD6DB60D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

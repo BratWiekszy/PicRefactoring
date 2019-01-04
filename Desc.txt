@@ -1,0 +1,7 @@
+commands.json file describes executions, that file undergoes.
+Execution is contains of file predicates and actions.
+Predicates determine conditions to apply when evaluating file, that is - if file is to be processed.
+Predicates consist of file name regexp, file properties and extension matchers.
+Processing file can rename it, rescale it's resulution, save to different format or try to match pic duplicates.
+
+Default file location is in executable directory. Cmd launch enables specifying custom path (relavative or absolute) to different command file.
