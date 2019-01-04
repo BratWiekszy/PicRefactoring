@@ -16,5 +16,13 @@ namespace PicRefactoring.Tests
 
 			Assert.AreEqual(width, fileWrapper.GetWidth());
 		}
+
+		[Test]
+		public void GetExtension_ReturnsCorrect()
+		{
+			var fileWrapper = new FileWrapper(new FileInfo("nest_by_mrfloki-dcgzwvz.png"));
+
+			Assert.AreEqual("png", fileWrapper.GetExtension());
+		}
 	}
 }

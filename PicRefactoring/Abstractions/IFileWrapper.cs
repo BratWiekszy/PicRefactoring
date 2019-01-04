@@ -7,5 +7,7 @@
 		int GetWidth();
 
 		int GetHeight();
+
+		string GetExtension();
 	}
 }

@@ -35,5 +35,13 @@ namespace PicRefactoring.Commanding
 				return bitmap.Height;
 			}
 		}
+
+		public string GetExtension()
+		{
+			var ext = _file.Extension;
+			if (ext.StartsWith('.'))
+				ext = ext.Substring(1);
+			return ext;
+		}
 	}
 }
