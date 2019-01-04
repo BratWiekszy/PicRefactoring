@@ -22,8 +22,8 @@ namespace PicRefactoring.Tests
 		public void FileMatches_YieldsPositive(string fileName)
 		{
 			var predicate = new FileNamePredicate(
-					new[] { @"^[\w\d]{15,}$", @"^[\d][\w]{20,}$", @"^__([\w_\d]+)[_-]{1,2}sample[-_]{1,2}[\dabcdef]+$" }
-				);
+				new[] { @"^[\w\d]{15,}$", @"^[\d][\w]{20,}$", @"^__([\w_\d]+)[_-]{1,2}sample[-_]{1,2}[\dabcdef]+$" }
+			);
 			var file      = Substitute.For<IFileWrapper>();
 			file.GetFileName().Returns(fileName);
 
