@@ -1,6 +1,8 @@
 ﻿using System;
+using JetBrains.Annotations;
 using JsonRazor;
 using JsonRazor.Serialization;
+using PicRefactoring.Actions;
 
 namespace PicRefactoring.Commanding
 {
@@ -65,6 +67,36 @@ namespace PicRefactoring.Commanding
 				default:
 					throw new ArgumentOutOfRangeException();
 			}
+		}
+
+		[NotNull]
+		public IFileAction CreateAction()
+		{
+			var token = Value as JsonObject;
+			switch (_type)
+			{
+				case ActionType.Rescale:
+					return token.ConvertSelf<RescaleAction>();
+				case ActionType.RenameCut: {
+					return CreateRenameAction<RenameCut>(token);
+				}
+				case ActionType.RenameRandom: {
+					return CreateRenameAction<RenameRandom>(token);
+				}
+				case ActionType.RenameRegex: {
+					return CreateRenameAction<RenameRegex>(token);
+				}
+				case ActionType.DetectDuplicates:
+					return new DetectDuplicatesAction();
+				default:
+					throw new ArgumentOutOfRangeException();
+			}
+		}
+
+		private RenameAction CreateRenameAction<T>(JsonObject token) where T : Rename
+		{
+			var rename = token.ConvertSelf<T>();
+			return new RenameAction(rename);
 		}
 	}
 }
