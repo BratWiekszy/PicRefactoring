@@ -5,4 +5,16 @@
     <TargetFramework>netcoreapp2.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="JetBrains.Annotations" Version="2018.2.1" />
+    <PackageReference Include="System.Drawing.Common" Version="4.5.1" />
+    <PackageReference Include="System.IO.Abstractions" Version="3.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="JsonRazor">
+      <HintPath>..\..\JsonRazor\JsonRazor\Release\netcoreapp2.0\JsonRazor.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>
