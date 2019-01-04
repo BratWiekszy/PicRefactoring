@@ -36,7 +36,7 @@ namespace PicRefactoring.Commanding
 
 		private void CheckGeneralValidity()
 		{
-			if(string.IsNullOrWhiteSpace(Type))
+			if(Type.IsNullOrWhitespace())
 				throw new BadCommandException();
 
 			if(Value == null && Details == null)

@@ -23,8 +23,10 @@ namespace PicRefactoring.Commanding
 		public int    MinKbWeight  { get; private set; }
 		public int    MinSize    { get; private set; }
 
+		// used by json deserializer
 		public PropertiesDetails() {}
 
+		// testing purposes
 		public PropertiesDetails(string comparison, int minKbWeight, int minSize)
 		{
 			Comparison = comparison;
@@ -37,17 +39,16 @@ namespace PicRefactoring.Commanding
 			if(MinSize < MinSizePixel || MinKbWeight < MinWeightKb || Comparison == null)
 				throw new BadCommandException();
 
-			var comp = Comparison.ToUpper().Trim();
-			if(! Enum.TryParse(typeof(ComparisonType), comp, out object compType))
+			var comp = Comparison.Trim();
+			if(! Enum.TryParse<ComparisonType>(comp, out ComparisonType compType))
 				throw new BadCommandException();
 
 			SetComparisonFunc(compType);
 		}
 
-		private void SetComparisonFunc(object compType)
+		private void SetComparisonFunc(ComparisonType compType)
 		{
-			var comparison = (ComparisonType)compType;
-			switch (comparison) 
+			switch (compType)
 			{
 				case ComparisonType.OR:
 					_comparison = (b1, b2) => b1 || b2;

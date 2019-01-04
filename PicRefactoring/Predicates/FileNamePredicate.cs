@@ -23,7 +23,7 @@ namespace PicRefactoring.Predicates
 
 		private void CheckValidity()
 		{
-			if(_regExpressions.Any(r => string.IsNullOrEmpty(r)))
+			if(_regExpressions.Any(r => r.IsNullOrWhitespace()))
 				throw new BadCommandException();
 		}
 
