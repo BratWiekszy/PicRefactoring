@@ -16,7 +16,6 @@ namespace PicRefactoring.Tests.Commanding
 
 			Assert.Throws<BadCommandException>(() => new ActionEntry("rescale", null));
 			Assert.Throws<BadCommandException>(() => new ActionEntry("rename", null));
-			Assert.Throws<BadCommandException>(() => new ActionEntry("suggestDuplicates", null));
 
 			Assert.Throws<BadCommandException>(() => new ActionEntry("rescale", new object()));
 			Assert.Throws<BadCommandException>(() => new ActionEntry("rename", new object()));
@@ -36,7 +35,7 @@ namespace PicRefactoring.Tests.Commanding
 		{
 			Assert.DoesNotThrow(() => new ActionEntry("Rescale",      new JsonToken()));
 			Assert.DoesNotThrow(() => new ActionEntry("rename",       new JsonToken()));
-			Assert.DoesNotThrow(() => new ActionEntry("SUGGESTDUPLICATES", new JsonToken()));
+			Assert.DoesNotThrow(() => new ActionEntry("SUGGESTDUPLICATES", null));
 		}
 	}
 }

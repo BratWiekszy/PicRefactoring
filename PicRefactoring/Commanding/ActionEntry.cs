@@ -27,6 +27,7 @@ namespace PicRefactoring.Commanding
 
 			CheckGeneralValiditity();
 			ConvertType();
+			CheckValidityPerType();
 		}
 
 		private void CheckGeneralValiditity()
@@ -34,7 +35,7 @@ namespace PicRefactoring.Commanding
 			if(Type.IsNullOrWhitespace())
 				throw new BadCommandException();
 
-			if(Value == null || !(Value is JsonToken))
+			if(Value != null && !(Value is JsonToken))
 				throw new BadCommandException();
 		}
 
@@ -42,6 +43,24 @@ namespace PicRefactoring.Commanding
 		{
 			if(Enum.TryParse<ActionType>(Type, true, out _type) == false)
 				throw new BadCommandException();
+		}
+
+		private void CheckValidityPerType()
+		{
+			switch (_type)
+			{
+				case ActionType.Rename:
+				case ActionType.Rescale: {
+					if(Value == null) throw new BadCommandException();
+				}
+					break;
+				case ActionType.SuggestDuplicates: {
+					if(Value != null) throw new BadCommandException();
+				}
+					break;
+				default:
+					throw new ArgumentOutOfRangeException();
+			}
 		}
 	}
 }
