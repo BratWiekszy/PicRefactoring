@@ -1,11 +1,10 @@
 ﻿using NSubstitute;
 using NUnit.Framework;
-using NUnit.Framework.Internal;
 using PicRefactoring.Abstractions;
 using PicRefactoring.Commanding;
 using PicRefactoring.Predicates;
 
-namespace PicRefactoring.Tests
+namespace PicRefactoring.Tests.Predicates
 {
 	[TestFixture()]
 	public class FileNamePredicateTests

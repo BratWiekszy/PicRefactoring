@@ -4,7 +4,7 @@ using PicRefactoring.Abstractions;
 using PicRefactoring.Commanding;
 using PicRefactoring.Predicates;
 
-namespace PicRefactoring.Tests
+namespace PicRefactoring.Tests.Predicates
 {
 	[TestFixture]
 	public class FilePropertiesPredicateTests

@@ -1,7 +1,7 @@
 ﻿using NUnit.Framework;
 using PicRefactoring.Commanding;
 
-namespace PicRefactoring.Tests
+namespace PicRefactoring.Tests.Commanding
 {
 	[TestFixture()]
 	public class PredicateEntryTests

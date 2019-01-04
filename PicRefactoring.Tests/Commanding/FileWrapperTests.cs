@@ -1,9 +1,8 @@
 ﻿using System.IO;
 using NUnit.Framework;
-using NUnit.Framework.Internal;
 using PicRefactoring.Commanding;
 
-namespace PicRefactoring.Tests
+namespace PicRefactoring.Tests.Commanding
 {
 	[TestFixture()]
 	public class FileWrapperTests

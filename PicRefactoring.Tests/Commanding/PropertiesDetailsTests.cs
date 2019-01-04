@@ -3,7 +3,7 @@ using NUnit.Framework;
 using PicRefactoring.Abstractions;
 using PicRefactoring.Commanding;
 
-namespace PicRefactoring.Tests
+namespace PicRefactoring.Tests.Commanding
 {
 	[TestFixture]
 	public class PropertiesDetailsTests
