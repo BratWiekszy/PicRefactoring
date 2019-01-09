@@ -2,6 +2,7 @@
 using JetBrains.Annotations;
 using JsonRazor;
 using JsonRazor.Serialization;
+using PicRefactoring.Abstractions;
 using PicRefactoring.Actions;
 
 namespace PicRefactoring.Commanding
@@ -23,6 +24,8 @@ namespace PicRefactoring.Commanding
 
 		public string Type { get; }
 		public object Value { get; }
+
+		public ActionEntry() {}
 
 		public ActionEntry(string Type, object Value)
 		{
@@ -70,7 +73,7 @@ namespace PicRefactoring.Commanding
 		}
 
 		[NotNull]
-		public IFileAction CreateAction()
+		public virtual IFileAction CreateAction([NotNull] IDependencyCreator creator)
 		{
 			var token = Value as JsonObject;
 			switch (_type)

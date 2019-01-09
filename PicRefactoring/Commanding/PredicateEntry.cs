@@ -15,13 +15,15 @@ namespace PicRefactoring.Commanding
 	[JsonInfo(new Type[]{typeof(string), typeof(string[]), typeof(PropertiesDetails)}, true, 
 			  nameof(PredicateEntry.Type), nameof(PredicateEntry.Value), nameof(PredicateEntry.Details),
 			  Members = ModelMembers.None)]
-	public sealed class PredicateEntry
+	public class PredicateEntry
 	{
 		private PredicateType _type;
 
 		public string            Type  { get; private set; }
 		public string[]          Value { get; }
 		public PropertiesDetails Details { get; }
+
+		public PredicateEntry() {}
 
 		public PredicateEntry(string Type, string[] Value, PropertiesDetails Details)
 		{
@@ -76,7 +78,7 @@ namespace PicRefactoring.Commanding
 		}
 
 		[NotNull]
-		public IFilePredicate CreatePredicate()
+		public virtual IFilePredicate CreatePredicate()
 		{
 			switch (_type)
 			{
