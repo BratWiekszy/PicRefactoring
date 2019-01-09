@@ -1,4 +1,5 @@
 ﻿using JsonRazor.Serialization;
+using PicRefactoring.Abstractions;
 using PicRefactoring.Commanding;
 
 namespace PicRefactoring.Actions
@@ -14,6 +15,11 @@ namespace PicRefactoring.Actions
 		{
 			if(MaxSize < MinSize)
 				throw new BadCommandException();
+		}
+
+		public void ActOnFile(IFileWrapper file)
+		{
+			throw new System.NotImplementedException();
 		}
 	}
 }

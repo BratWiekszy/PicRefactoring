@@ -1,7 +1,7 @@
 ﻿using System.IO;
 using System.IO.Abstractions;
 using JetBrains.Annotations;
-using FileWrapper = PicRefactoring.Commanding.FileWrapper;
+using PicRefactoring.Abstractions;
 
 namespace PicRefactoring.Actions
 {
@@ -19,7 +19,7 @@ namespace PicRefactoring.Actions
 			_rename.CheckValidity();
 		}
 
-		public void ActOnFile([NotNull] FileWrapper file, [NotNull] DirectoryInfoBase directory)
+		public void ActOnFile([NotNull] IFileWrapper file)
 		{
 			var name = file.GetFileName();
 			var ext = "."+ file.GetExtension();
