@@ -31,10 +31,9 @@ namespace PicRefactoring.Tests.Actions
 			var fileSystem = SetupFileSystem();
 			var fileInfo = fileSystem.FileInfo.FromFileName("filename123.jpg");
 			var file = new FileWrapper(fileInfo);
-			var dir = Substitute.For<DirectoryInfoBase>();
 
 			rename.GetRenamedFileName("filename123").Returns("file_name");
-			action.ActOnFile(file, dir);
+			action.ActOnFile(file);
 
 			Assert.AreEqual("file_name", file.GetFileName());
 			Assert.AreEqual("jpg", file.GetExtension());
@@ -50,11 +49,10 @@ namespace PicRefactoring.Tests.Actions
 			var fileSystem = SetupFileSystem();
 			var fileInfo   = fileSystem.FileInfo.FromFileName("textFile007.txt");
 			var file       = new FileWrapper(fileInfo);
-			var dir        = Substitute.For<DirectoryInfoBase>();
 
 			rename.GetRenamedFileName("textFile007").Returns("textFile");
 			rename.TryMakeFileNameUnique("textFile", "textFile007").Returns("textFile1");
-			action.ActOnFile(file, dir);
+			action.ActOnFile(file);
 
 			Assert.AreEqual("textFile1", file.GetFileName());
 			Assert.AreEqual("txt",       file.GetExtension());
