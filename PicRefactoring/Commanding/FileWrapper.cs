@@ -21,6 +21,8 @@ namespace PicRefactoring.Commanding
 		{
 		}
 
+		public FileInfoBase UnderlyingFile => _file;
+
 		public int GetWeightInKb()
 		{
 			return Math.Max(4, (int)(_file.Length / 1024));

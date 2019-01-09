@@ -1,4 +1,6 @@
-﻿namespace PicRefactoring.Abstractions
+﻿using System.IO.Abstractions;
+
+namespace PicRefactoring.Abstractions
 {
 	public interface IFileWrapper
 	{
@@ -11,5 +13,6 @@
 		string GetExtension();
 
 		string GetFileName();
+		FileInfoBase UnderlyingFile { get; }
 	}
 }
