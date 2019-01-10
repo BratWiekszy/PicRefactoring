@@ -8,5 +8,7 @@ namespace PicRefactoring.Predicates
 		bool FileMatches([NotNull] IFileWrapper file);
 
 		int Order { get; }
+
+		void Prepare();
 	}
 }

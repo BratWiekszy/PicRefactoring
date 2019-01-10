@@ -17,6 +17,7 @@ namespace PicRefactoring.Tests.Predicates
 											   int fileWeight, int fileWidth, int fileHeight)
 		{
 			var details = new PropertiesDetails(comp, weight, size);
+			details.Prepare();
 			var predicate = new FilePropertiesPredicate(details);
 
 			var file = Substitute.For<IFileWrapper>();
@@ -35,6 +36,7 @@ namespace PicRefactoring.Tests.Predicates
 											   int fileWeight, int fileWidth, int fileHeight)
 		{
 			var details = new PropertiesDetails(comp, weight, size);
+			details.Prepare();
 			var predicate = new FilePropertiesPredicate(details);
 
 			var file = Substitute.For<IFileWrapper>();

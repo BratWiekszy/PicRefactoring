@@ -11,10 +11,14 @@ namespace PicRefactoring.Predicates
 		public FilePropertiesPredicate([NotNull] PropertiesDetails details) 
 		{
 			_details = details;
-			details.Prepare();
 		}
 
 		public int Order => 100000;
+
+		public void Prepare()
+		{
+			_details.Prepare();
+		}
 
 		public bool FileMatches([NotNull] IFileWrapper file)
 		{
