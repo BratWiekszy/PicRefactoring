@@ -49,9 +49,9 @@ namespace PicRefactoring.Tests.Commanding
 			Assert.True(details.FileMatches(file));
 		}
 
-		[TestCase("or",  1000, 1200, 800,  900, 900)]
-		[TestCase("or",  1000, 1200, 200, 700,  900)]
-		[TestCase("and", 1000, 1200, 900, 2800, 900)]
+		[TestCase("or",  1000, 1200, 800,  900,  900)]
+		[TestCase("or",  1000, 1200, 200,  700,  900)]
+		[TestCase("and", 1000, 1200, 900,  2800, 900)]
 		[TestCase("and", 1000, 1200, 4000, 800,  1100)]
 		public void FileMatches_YieldsNegative(string comp, int weight, int size, 
 											   int fileWeight, int fileWidth, int fileHeight)

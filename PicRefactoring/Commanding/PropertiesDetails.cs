@@ -40,8 +40,8 @@ namespace PicRefactoring.Commanding
 				throw new BadCommandException();
 
 			var comp = Comparison.Trim();
-			if(! Enum.TryParse<ComparisonType>(comp, out ComparisonType compType))
-				throw new BadCommandException();
+			if(! Enum.TryParse<ComparisonType>(comp, true, out ComparisonType compType))
+				throw new BadCommandException($"Comparison {Comparison} not supported");
 
 			SetComparisonFunc(compType);
 		}
