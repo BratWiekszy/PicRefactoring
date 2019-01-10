@@ -1,11 +1,13 @@
-﻿using PicRefactoring.Commanding;
+﻿using JetBrains.Annotations;
 
 namespace PicRefactoring.Abstractions
 {
 	public interface ICommands 
 	{
+		[NotNull]
 		string[] Directories { get; }
 
-		Execution[] GetExecutions();
+		[NotNull] 
+		IExecution[] GetExecutions();
 	}
 }
