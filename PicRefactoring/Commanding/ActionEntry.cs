@@ -31,16 +31,19 @@ namespace PicRefactoring.Commanding
 		{
 			this.Type = Type;
 			this.Value = Value;
+		}
 
-			CheckGeneralValiditity();
+		public void CheckValidity()
+		{
+			CheckGeneralValidity();
 			ConvertType();
 			CheckValidityPerType();
 		}
 
-		private void CheckGeneralValiditity()
+		private void CheckGeneralValidity()
 		{
 			if(Type.IsNullOrWhitespace())
-				throw new BadCommandException();
+				throw new BadCommandException("action type");
 
 			if(Value != null && !(Value is JsonToken))
 				throw new BadCommandException();
@@ -49,7 +52,7 @@ namespace PicRefactoring.Commanding
 		private void ConvertType()
 		{
 			if(Enum.TryParse<ActionType>(Type, true, out _type) == false)
-				throw new BadCommandException();
+				throw new BadCommandException($"action type {Type} not supported");
 		}
 
 		private void CheckValidityPerType()
@@ -60,11 +63,11 @@ namespace PicRefactoring.Commanding
 				case ActionType.RenameRandom:
 				case ActionType.RenameRegex:
 				case ActionType.Rescale: {
-					if(Value == null) throw new BadCommandException();
+					if(Value == null) throw new BadCommandException("rescale requires Value object");
 				}
 					break;
 				case ActionType.DetectDuplicates: {
-					if(Value != null) throw new BadCommandException();
+					if(Value != null) throw new BadCommandException("detectDuplicates doesn't take any arguments");
 				}
 					break;
 				default:
@@ -73,7 +76,14 @@ namespace PicRefactoring.Commanding
 		}
 
 		[NotNull]
-		public virtual IFileAction CreateAction([NotNull] IDependencyCreator creator)
+		public virtual IFileAction CreateAction( IDependencyCreator creator)
+		{
+			var action = CreateAction();
+			action.CheckValidity();
+			return action;
+		}
+
+		private IFileAction CreateAction()
 		{
 			var token = Value as JsonObject;
 			switch (_type)
