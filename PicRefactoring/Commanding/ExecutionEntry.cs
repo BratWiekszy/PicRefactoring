@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using JsonRazor.Serialization;
 using PicRefactoring.Actions;
 using PicRefactoring.Predicates;
@@ -25,29 +26,55 @@ namespace PicRefactoring.Commanding
 			CheckValidity();
 
 			var predicates = GetOrderedPredicates();
-			var actions = GetActions();
+			var actions    = GetActions();
 			return new Execution(predicates, actions, this);
 		}
 
 		protected IFilePredicate[] GetOrderedPredicates() => 
-			Predicates.Select(p => p.CreatePredicate()).OrderBy(p => p.Order).ToArray();
+			Predicates.Select((p, i) =>
+			{
+				try
+				{
+					p.CheckValidity();
+					return p.CreatePredicate();
+				}
+				catch (BadCommandException e)
+				{
+					throw new BadCommandException($"Predicate {i}:", e);
+				}
+			}).OrderBy(p => p.Order).ToArray();
 
 		protected IFileAction[] GetActions() => 
-			Actions.Select(p => p.CreateAction(null)).ToArray();
+			Actions.Select((a, i) =>
+			{
+				try
+				{
+					a.CheckValidity();
+					return a.CreateAction(null);
+				}
+				catch (BadCommandException e)
+				{
+					throw new BadCommandException($"Action {i}:", e);
+				}
+			}).ToArray();
 
 		private void CheckValidity()
 		{
 			if(Predicates == null || Predicates.Length == 0)
-				throw new BadCommandException();
+				throw new BadCommandException("no predicates");
 
 			if(Actions == null || Actions.Length == 0)
-				throw new BadCommandException();
+				throw new BadCommandException("no actions");
 
-			if(Predicates.Any(p => p == null))
-				throw new BadCommandException();
+			CheckNullInArray(Predicates, "predicate");
+			CheckNullInArray(Actions, "action");
+		}
 
-			if(Actions.Any(a => a == null))
-				throw new BadCommandException();
+		private void CheckNullInArray(Array array, string type)
+		{
+			int i = 0;
+			if((i = Array.IndexOf(array, null)) >= 0)
+				throw new BadCommandException($"{type} null at {i}");
 		}
 	}
 }

@@ -16,7 +16,7 @@ namespace PicRefactoring.Tests.Commanding
 			public IFilePredicate[] RunGetOrderedPredicates()
 			{
 				return base.GetOrderedPredicates();
-			} 
+			}
 		}
 
 		[Test]
@@ -41,7 +41,7 @@ namespace PicRefactoring.Tests.Commanding
 			fp1.Order.Returns(2);
 			fp2.Order.Returns(1);
 
-			var entry = new Test(new []{pred1,pred2}, new []{Substitute.For<ActionEntry>()});
+			var entry = new Test(new []{ pred1, pred2 }, new []{Substitute.For<ActionEntry>()});
 
 			var correctOrder = new IFilePredicate[] { fp2, fp1 };
 			CollectionAssert.AreEqual(correctOrder, entry.RunGetOrderedPredicates());
