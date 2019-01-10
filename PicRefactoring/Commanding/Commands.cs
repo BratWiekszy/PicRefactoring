@@ -1,13 +1,17 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Linq;
 using JetBrains.Annotations;
 using JsonRazor.Serialization;
+using PicRefactoring.Abstractions;
 
 namespace PicRefactoring.Commanding
 {
 	[JsonInfo(ModelMembers.Property, Flags = Deserializer.DefaultFlags)]
-	public class Commands
+	public class Commands : ICommands
 	{
+		private Execution[] _executions;
+
 		public string[]         Directories { get; private set; }
 		public ExecutionEntry[] Executions  { get; private set; }
 
@@ -38,10 +42,12 @@ namespace PicRefactoring.Commanding
 				|| path.IndexOfAny(Path.GetInvalidFileNameChars()) >= 0;
 		}
 
-		[NotNull]
-		public Execution[] CreateExecutions()
+		[NotNull] 
+		public Execution[] GetExecutions() => _executions ?? throw new InvalidOperationException();
+
+		public void CreateExecutions()
 		{
-			return Executions.Select(e => e.CreateExecution()).ToArray();
+			_executions = Executions.Select(e => e.CreateExecution()).ToArray();
 		}
 	}
 }

@@ -1,6 +1,10 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.IO.Abstractions;
 using System.Linq;
+using JsonRazor.Serialization;
+using PicRefactoring.Abstractions;
+using PicRefactoring.Commanding;
 
 namespace PicRefactoring
 {
@@ -45,6 +49,26 @@ namespace PicRefactoring
 				return false;
 
 			return true;
+		}
+
+		public ICommands ParseModel()
+		{
+			if(_commandFile == null)
+				throw new InvalidOperationException();
+
+			var commands = Parse();
+			commands.CheckValidity();
+			commands.CreateExecutions();
+			return commands;
+		}
+
+		private Commands Parse()
+		{
+			using (var reader = _commandFile.OpenText())
+			{
+				var commands = Deserializer.Consume<Commands>(reader);
+				return commands;
+			}
 		}
 	}
 }
