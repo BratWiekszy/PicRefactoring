@@ -9,7 +9,7 @@ namespace PicRefactoring.Actions
 
 		}
 
-		public void ActOnFile(IFileWrapper file)
+		public string ActOnFile(IFileWrapper file)
 		{
 			throw new System.NotImplementedException();
 		}

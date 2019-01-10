@@ -1,4 +1,5 @@
-﻿using System.IO.Abstractions;
+﻿using System;
+using System.IO.Abstractions;
 using System.Linq;
 using JetBrains.Annotations;
 using PicRefactoring.Abstractions;
@@ -31,12 +32,15 @@ namespace PicRefactoring.Commanding
 		{
 			if (_predicates.All(p => p.FileMatches(file)))
 			{
+				Console.WriteLine($"- processing file {file.GetFileNameWithExtension()}");
 				foreach (var action in _actions)
 				{
-					action.ActOnFile(file);
+					var description = action.ActOnFile(file);
+					Console.WriteLine(description);
 				}
 			}
-
+			else
+				Console.WriteLine($" ~ predicates not met for file {file.GetFileNameWithExtension()}");
 
 		}
 	}

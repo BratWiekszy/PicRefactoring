@@ -13,6 +13,9 @@ namespace PicRefactoring.Abstractions
 		string GetExtension();
 
 		string GetFileName();
+
+		string GetFileNameWithExtension();
+
 		FileInfoBase UnderlyingFile { get; }
 	}
 }

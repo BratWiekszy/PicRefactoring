@@ -19,7 +19,7 @@ namespace PicRefactoring.Actions
 			_rename.CheckValidity();
 		}
 
-		public void ActOnFile([NotNull] IFileWrapper file)
+		public string ActOnFile([NotNull] IFileWrapper file)
 		{
 			var name = file.GetFileName();
 			var ext = "."+ file.GetExtension();
@@ -29,6 +29,7 @@ namespace PicRefactoring.Actions
 				newName = _rename.TryMakeFileNameUnique(newName, name);
 			}
 			file.UnderlyingFile.MoveTo(newName + ext);
+			return $"    renamed file to {newName + ext}";
 		}
 
 		private bool FileExists(string fileName, FileInfoBase file)

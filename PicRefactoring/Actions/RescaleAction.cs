@@ -17,7 +17,7 @@ namespace PicRefactoring.Actions
 				throw new BadCommandException();
 		}
 
-		public void ActOnFile(IFileWrapper file)
+		public string ActOnFile(IFileWrapper file)
 		{
 			throw new System.NotImplementedException();
 		}

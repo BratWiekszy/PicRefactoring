@@ -21,6 +21,11 @@ namespace PicRefactoring.Commanding
 		{
 		}
 
+		public string GetFileNameWithExtension()
+		{
+			return _file.Name;
+		}
+
 		public FileInfoBase UnderlyingFile => _file;
 
 		public int GetWeightInKb()

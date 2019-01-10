@@ -7,6 +7,6 @@ namespace PicRefactoring.Actions
 	{
 		void CheckValidity();
 
-		void ActOnFile([NotNull] IFileWrapper file);
+		string ActOnFile([NotNull] IFileWrapper file);
 	}
 }
