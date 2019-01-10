@@ -13,12 +13,15 @@ namespace PicRefactoring.Predicates
 		public FileExtensionPredicate([NotNull] string[] extensions) 
 		{
 			_extensions = extensions;
-
-			CheckValidity();
-			CleanExtensions();
 		}
 
 		public int Order => 10;
+
+		public void Prepare()
+		{
+			CheckValidity();
+			CleanExtensions();
+		}
 
 		private void CheckValidity()
 		{

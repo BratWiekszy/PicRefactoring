@@ -39,6 +39,7 @@ namespace PicRefactoring.Tests.Predicates
 		public void FileMatches_MatchingAintTooStrict(string ext)
 		{
 			var predicate = new FileExtensionPredicate(new[] { "PNG", ".jpg", ".JPEG" });
+			predicate.Prepare();
 			var file      = Substitute.For<IFileWrapper>();
 			file.GetExtension().Returns(ext);
 
@@ -48,7 +49,7 @@ namespace PicRefactoring.Tests.Predicates
 		[Test]
 		public void DetectsBadExtensions()
 		{
-			Assert.Throws<BadCommandException>(() => new FileExtensionPredicate(new[] { "", null, "	" }));
+			Assert.Throws<BadCommandException>(() => new FileExtensionPredicate(new[] { "", null, "	" }).Prepare());
 		}
 	}
 }
