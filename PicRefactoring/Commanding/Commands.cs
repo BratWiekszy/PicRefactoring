@@ -10,7 +10,7 @@ namespace PicRefactoring.Commanding
 	[JsonInfo(ModelMembers.Property, Flags = Deserializer.DefaultFlags)]
 	public class Commands : ICommands
 	{
-		private Execution[] _executions;
+		private IExecution[] _executions;
 
 		public string[]         Directories { get; private set; }
 		public ExecutionEntry[] Executions  { get; private set; }
@@ -49,8 +49,8 @@ namespace PicRefactoring.Commanding
 				|| path.IndexOfAny(Path.GetInvalidFileNameChars()) >= 0;
 		}
 
-		[NotNull] 
-		public Execution[] GetExecutions() => _executions ?? throw new InvalidOperationException();
+		[NotNull]
+		public IExecution[] GetExecutions() => _executions ?? throw new InvalidOperationException();
 
 		public void CreateExecutions()
 		{
@@ -58,7 +58,7 @@ namespace PicRefactoring.Commanding
 			{
 				try
 				{
-					return e.CreateExecution();
+					return (IExecution)e.CreateExecution();
 				}
 				catch (BadCommandException ex)
 				{

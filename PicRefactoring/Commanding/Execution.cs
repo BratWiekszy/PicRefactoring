@@ -8,9 +8,9 @@ using PicRefactoring.Predicates;
 
 namespace PicRefactoring.Commanding
 {
-	public class Execution
+	public class Execution : IExecution
 	{
-		private ExecutionEntry _entry;
+		private ExecutionEntry   _entry;
 		private IFilePredicate[] _predicates;
 		private IFileAction[]    _actions;
 
@@ -28,20 +28,18 @@ namespace PicRefactoring.Commanding
 			ExecuteAction(new FileWrapper(file));
 		}
 
-		public void ExecuteAction([NotNull] IFileWrapper file)
+		public bool ExecuteAction([NotNull] IFileWrapper file)
 		{
 			if (_predicates.All(p => p.FileMatches(file)))
 			{
-				Console.WriteLine($"- processing file {file.GetFileNameWithExtension()}");
 				foreach (var action in _actions)
 				{
 					var description = action.ActOnFile(file);
 					Console.WriteLine(description);
 				}
+				return true;
 			}
-			else
-				Console.WriteLine($" ~ predicates not met for file {file.GetFileNameWithExtension()}");
-
+			return false;
 		}
 	}
 }
