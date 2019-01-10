@@ -12,7 +12,7 @@ namespace PicRefactoring.Tests.Predicates
 		[Test]
 		public void BadRegexesAreDetected()
 		{
-			Assert.Throws<BadCommandException>(() => new FileNamePredicate(new[] { "", null, "	" }));
+			Assert.Throws<BadCommandException>(() => new FileNamePredicate(new[] { "", null, "	" }).Prepare());
 		}
 		
 		[TestCase("filename1234567")]
@@ -23,6 +23,7 @@ namespace PicRefactoring.Tests.Predicates
 			var predicate = new FileNamePredicate(
 				new[] { @"^[\w\d]{15,}$", @"^[\d][\w]{20,}$", @"^__([\w_\d]+)[_-]{1,2}sample[-_]{1,2}[\dabcdef]+$" }
 			);
+			predicate.Prepare();
 			var file      = Substitute.For<IFileWrapper>();
 			file.GetFileName().Returns(fileName);
 
@@ -37,6 +38,7 @@ namespace PicRefactoring.Tests.Predicates
 			var predicate = new FileNamePredicate(
 				new[] { @"^[\w\d]{15,}$", @"^[\d][\w]{20,}$", @"^__([\w_\d]+)[_-]{1,2}sample[-_]{1,2}[\dabcdef]+$" }
 			);
+			predicate.Prepare();
 			var file = Substitute.For<IFileWrapper>();
 			file.GetFileName().Returns(fileName);
 
