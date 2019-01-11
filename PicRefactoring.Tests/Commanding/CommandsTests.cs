@@ -15,5 +15,16 @@ namespace PicRefactoring.Tests.Commanding
 
 			Assert.Throws<BadCommandException>(() => new Commands(new[] { @"d:\elo.jpg" }, null).CheckValidity());
 		}
+
+		[Test]
+		public void CheckValidity_NotThrowOnValidDirPaths()
+		{
+			Assert.DoesNotThrow(() 
+				=> new Commands(new[] { @"c:\dir\fil 2" }, new []{ new ExecutionEntry(), }).CheckValidity()
+			);
+			Assert.DoesNotThrow(() 
+				=> new Commands(new[] {@"c:\dir__-00f 3" }, new []{ new ExecutionEntry(), }).CheckValidity()
+			);
+		}
 	}
 }

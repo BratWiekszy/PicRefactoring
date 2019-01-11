@@ -37,6 +37,7 @@ namespace PicRefactoring
 				throw new FileNotFoundException(CommandsFileName);
 
 			_commandFile = _fileSystem.FileInfo.FromFileName(path);
+			Console.WriteLine($"<!-- Using commands file: {_commandFile.FullName} -->");
 		}
 
 		private bool ContainsFilePath(string[] args)

@@ -15,7 +15,7 @@ namespace PicRefactoring.Commanding
 		public string[]         Directories { get; private set; }
 		public ExecutionEntry[] Executions  { get; private set; }
 
-		private Commands() {}
+		public Commands() {}
 
 		public Commands(string[] directories, ExecutionEntry[] executions)
 		{
@@ -32,6 +32,9 @@ namespace PicRefactoring.Commanding
 
 			if(Executions == null || Executions.Length == 0)
 				throw new BadCommandException("no executions");
+
+			if(Executions.Any(e => e == null))
+				throw new BadCommandException("execution null");
 		}
 
 		private bool CheckPathValidity(string path)
@@ -44,9 +47,11 @@ namespace PicRefactoring.Commanding
 
 		private bool IsInvalidPath(string path)
 		{
-			return path.IsNullOrWhitespace()
-				|| path.IndexOfAny(Path.GetInvalidPathChars()) >= 0 
-				|| path.IndexOfAny(Path.GetInvalidFileNameChars()) >= 0;
+			var inv1 = Path.GetInvalidPathChars();
+			if (path.IsNullOrWhitespace())
+				return true;
+
+			return path.IndexOfAny(inv1) >= 0;
 		}
 
 		[NotNull]

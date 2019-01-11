@@ -4,12 +4,14 @@ using static System.Console;
 
 namespace PicRefactoring
 {
-	class Program
+	public class Program
 	{
 		static void Main(string[] args)
 		{
 			var commands = ReadCommands(args);
-
+			var executor = new CommandsExecutor(commands);
+			executor.ExecuteCommands();
+			ReadKey();
 		}
 
 		private static ICommands ReadCommands(string[] args)
