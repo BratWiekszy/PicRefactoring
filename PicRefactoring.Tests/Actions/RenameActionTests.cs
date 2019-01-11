@@ -15,9 +15,9 @@ namespace PicRefactoring.Tests.Actions
 		{
 			var fileSystem = new MockFileSystem(new Dictionary<string, MockFileData>
 			{
-				{ @"c:\filename123.jpg", new MockFileData("Testing is meh.") },
-				{ @"c:\textFile007.txt", new MockFileData("Testing is meh.") },
-				{ @"c:\textFile.txt", new MockFileData("Testing is meh.") }
+				{ @"c:\dir\filename123.jpg", new MockFileData("Testing is meh.") },
+				{ @"c:\dir\textFile007.txt", new MockFileData("Testing is meh.") },
+				{ @"c:\dir\textFile.txt", new MockFileData("Testing is meh.") }
 			});
 			return fileSystem;
 		}
@@ -29,7 +29,7 @@ namespace PicRefactoring.Tests.Actions
 			var rename = Substitute.For<Rename>();
 			var action = new RenameAction(rename);
 			var fileSystem = SetupFileSystem();
-			var fileInfo = fileSystem.FileInfo.FromFileName("filename123.jpg");
+			var fileInfo = fileSystem.FileInfo.FromFileName(@"c:\dir\filename123.jpg");
 			var file = new FileWrapper(fileInfo);
 
 			rename.GetRenamedFileName("filename123").Returns("file_name");
@@ -37,8 +37,8 @@ namespace PicRefactoring.Tests.Actions
 
 			Assert.AreEqual("file_name", file.GetFileName());
 			Assert.AreEqual("jpg", file.GetExtension());
-			Assert.True(fileSystem.File.Exists(@"c:\file_name.jpg"));
-			Assert.False(fileSystem.File.Exists(@"c:\filename123.jpg"));
+			Assert.True(fileSystem.File.Exists(@"c:\dir\file_name.jpg"));
+			Assert.False(fileSystem.File.Exists(@"c:\dir\filename123.jpg"));
 		}
 
 		[Test]
@@ -47,7 +47,7 @@ namespace PicRefactoring.Tests.Actions
 			var rename = Substitute.For<Rename>();
 			var action = new RenameAction(rename);
 			var fileSystem = SetupFileSystem();
-			var fileInfo   = fileSystem.FileInfo.FromFileName("textFile007.txt");
+			var fileInfo   = fileSystem.FileInfo.FromFileName(@"c:\dir\textFile007.txt");
 			var file       = new FileWrapper(fileInfo);
 
 			rename.GetRenamedFileName("textFile007").Returns("textFile");
@@ -56,8 +56,8 @@ namespace PicRefactoring.Tests.Actions
 
 			Assert.AreEqual("textFile1", file.GetFileName());
 			Assert.AreEqual("txt",       file.GetExtension());
-			Assert.True(fileSystem.File.Exists(@"c:\textFile1.txt"));
-			Assert.False(fileSystem.File.Exists(@"c:\textFile007.txt"));
+			Assert.True(fileSystem.File.Exists(@"c:\dir\textFile1.txt"));
+			Assert.False(fileSystem.File.Exists(@"c:\dir\textFile007.txt"));
 		}
 	}
 }

@@ -28,8 +28,10 @@ namespace PicRefactoring.Actions
 			{
 				newName = _rename.TryMakeFileNameUnique(newName, name);
 			}
-			file.UnderlyingFile.MoveTo(newName + ext);
-			return $"    renamed file to {newName + ext}";
+
+			var newFileName = newName + ext;
+			file.UnderlyingFile.MoveTo(Path.Combine(file.UnderlyingFile.Directory.FullName, newFileName));
+			return $"  renamed file to {newFileName}";
 		}
 
 		private bool FileExists(string fileName, FileInfoBase file)
